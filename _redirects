@@ -1,0 +1,8 @@
+# Dozr — Netlify Redirects
+# GeoIP redirect: Brazilian visitors land on the PT-BR page
+
+/pt/    /pt/index.html    200
+/pt     /pt/index.html    200
+/_forms /index.html       200
+/       /pt/index.html    302    Country=BR
+/*      /index.html       200

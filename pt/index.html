@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO ───────────────────────────────────────────────────────── -->
+  <title>Dozr — Lembrete de Suplementos e Medicamentos para iPhone</title>
+  <meta name="description" content="Dozr é um app privado para iPhone que ajuda você a lembrar medicamentos, vitaminas e suplementos. Entre na lista de lançamento para receber o aviso da App Store." />
+  <link rel="canonical" href="https://dozr.app/pt/" />
+
+  <!-- Hreflang ──────────────────────────────────────────────────── -->
+  <link rel="alternate" hreflang="en"    href="https://dozr.app/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://dozr.app/pt/" />
+  <link rel="alternate" hreflang="x-default" href="https://dozr.app/" />
+
+  <!-- Open Graph ────────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://dozr.app/pt/" />
+  <meta property="og:title"       content="Dozr — Nunca mais esqueça um suplemento" />
+  <meta property="og:description" content="Lembretes privados, registro por toque e histórico de aderência no iPhone. Entre na lista de lançamento do Dozr." />
+  <meta property="og:image"       content="https://dozr.app/icon.png" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <!-- Twitter Card ──────────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Dozr — Nunca mais esqueça um suplemento" />
+  <meta name="twitter:description" content="Lembretes privados, registro por toque e histórico de aderência no iPhone. Entre na lista de lançamento." />
+  <meta name="twitter:image"       content="https://dozr.app/icon.png" />
+
+  <!-- Icons ─────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="../icon.png" />
+  <link rel="apple-touch-icon"      href="../icon.png" />
+
+  <!-- Fonts ─────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <!-- SoftwareApplication JSON-LD ───────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dozr",
+    "operatingSystem": "iOS",
+    "applicationCategory": "HealthApplication",
+    "offers": [
+      { "@type": "Offer", "name": "Dozr Free", "price": "0", "priceCurrency": "BRL" },
+      { "@type": "Offer", "name": "Dozr Pro Mensal", "price": "9.90", "priceCurrency": "BRL" },
+      { "@type": "Offer", "name": "Dozr Pro Anual", "price": "79.90", "priceCurrency": "BRL" }
+    ],
+    "description": "Configure seus medicamentos e vitaminas uma vez. O Dozr te lembra todo dia, registra cada dose e mostra seu histórico de aderência.",
+    "url": "https://dozr.app/pt/"
+  }
+  </script>
+
+  <!-- FAQPage JSON-LD ───────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Preciso criar uma conta?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Não. Zero cadastro. O Dozr funciona completamente offline — seus dados ficam no iPhone e nunca saem dele." }
+      },
+      {
+        "@type": "Question",
+        "name": "Funciona para medicamentos prescritos?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Para qualquer coisa que você precisa tomar regularmente: remédios, vitaminas, suplementos ou fitoterápicos. O Dozr não é um aplicativo médico — é uma ferramenta de organização e hábito." }
+      },
+      {
+        "@type": "Question",
+        "name": "Meus dados ficam seguros?",
+        "acceptedAnswer": { "@type": "Answer", "text": "100%. Nenhum dado sai do seu dispositivo. Sem nuvem, sem conta, sem empresa acessando seu histórico. Seus hábitos de saúde são privados." }
+      },
+      {
+        "@type": "Question",
+        "name": "Quantos suplementos posso adicionar gratuitamente?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No plano gratuito você pode adicionar até 5 itens — suficiente para a maioria das rotinas. Para rotinas mais completas, o plano Pro oferece itens ilimitados." }
+      },
+      {
+        "@type": "Question",
+        "name": "Como cancelo o Pro?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pelo próprio iPhone: Ajustes → [seu nome] → Assinaturas → Dozr Pro. Cancele a qualquer momento, sem burocracia." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Reset & Variables ────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #0F62FE;
+      --blue-dark: #0043CE;
+      --black:     #0a0a0a;
+      --light:     #F4F7FF;
+      --gray:      #6B7280;
+      --border:    #E5E7EB;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      color: #111827;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Skip link (a11y) ─────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      z-index: 999;
+      padding: 8px 16px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.875rem;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 0; }
+
+    /* ── Lang switcher ────────────────────────────────────────────── */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-opt {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 7px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: rgba(255,255,255,0.65);
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+    }
+
+    .lang-opt.active {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .lang-opt:hover:not(.active) { color: #fff; }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    .hero {
+      background: var(--blue);
+      position: relative;
+      padding: 64px 24px 148px;
+      text-align: center;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -5%;
+      width: 110%; height: 100px;
+      background: var(--light);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      z-index: 1;
+    }
+
+    .hero > :not(.lang-switcher) { position: relative; z-index: 2; }
+    .lang-switcher { position: absolute; z-index: 10; }
+
+    .hero-logo {
+      width: 88px; height: 88px;
+      border-radius: 22px;
+      display: block;
+      margin: 0 auto 28px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+
+    .launch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 999px;
+      padding: 7px 14px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.75rem, 5.5vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: rgba(255,255,255,0.85);
+      max-width: 420px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .btn-appstore {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #000; color: #fff;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 14px;
+      transition: transform 0.15s, opacity 0.15s;
+      cursor: pointer;
+    }
+    .btn-appstore:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-appstore:active { transform: translateY(0); }
+
+    .btn-appstore-text { display: flex; flex-direction: column; text-align: left; line-height: 1.2; }
+    .btn-appstore-text small  { font-size: 0.65rem; font-weight: 400; opacity: 0.72; }
+    .btn-appstore-text strong { font-size: 1rem; font-weight: 700; }
+
+    .hero-trust {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.02em;
+    }
+
+    .waitlist-form {
+      display: flex;
+      width: min(100%, 480px);
+      margin: 0 auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .waitlist-input {
+      min-width: 0;
+      flex: 1;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px;
+      padding: 0 16px;
+      background: rgba(255,255,255,0.96);
+      color: #111827;
+      font: 500 0.95rem 'DM Sans', -apple-system, sans-serif;
+      outline: none;
+    }
+
+    .waitlist-input::placeholder { color: #9CA3AF; }
+    .waitlist-input:focus {
+      border-color: #fff;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+    }
+
+    .btn-waitlist {
+      height: 52px;
+      border: 0;
+      border-radius: 14px;
+      padding: 0 22px;
+      background: #000;
+      color: #fff;
+      font: 700 0.95rem 'DM Sans', -apple-system, sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    .btn-waitlist:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-waitlist:active { transform: translateY(0); }
+
+    .form-note {
+      max-width: 420px;
+      margin: 0 auto;
+      font-size: 0.75rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .success-message {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .success-message.is-visible { display: block; }
+
+    /* ── TRUST BAR ────────────────────────────────────────────────── */
+    .trust-bar {
+      background: var(--light);
+      padding: 20px 24px 40px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+
+    .trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    .trust-item svg { flex-shrink: 0; }
+
+    /* ── MOCKUP ───────────────────────────────────────────────────── */
+    .mockup-section {
+      background: var(--light);
+      padding: 0 24px 88px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .mockup-caption { text-align: center; }
+
+    .mockup-caption h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .mockup-caption p { font-size: 0.95rem; color: var(--gray); }
+
+    .mockup-wrap { position: relative; display: inline-block; }
+
+    .streak-badge {
+      position: absolute;
+      top: 56px;
+      right: -44px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+      pointer-events: none;
+    }
+
+    .streak-badge-emoji { font-size: 1.3rem; line-height: 1; }
+    .streak-num { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: #111827; line-height: 1; }
+    .streak-lbl { font-size: 0.62rem; color: var(--gray); margin-top: 2px; white-space: nowrap; }
+
+    .phone {
+      width: 264px;
+      background: #1C1C1E;
+      border-radius: 46px;
+      padding: 14px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .phone-notch {
+      width: 88px; height: 28px;
+      background: #1C1C1E;
+      border-radius: 0 0 22px 22px;
+      margin: 0 auto;
+    }
+
+    .phone-screen { background: #F9FAFB; border-radius: 34px; overflow: hidden; }
+    .app-screen   { padding: 10px 14px 20px; }
+
+    .app-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 14px; padding-top: 4px;
+    }
+
+    .app-title { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: #111827; }
+    .app-date  { font-size: 10px; color: #9CA3AF; }
+
+    .progress-wrap {
+      background: #fff; border-radius: 16px; padding: 14px;
+      margin-bottom: 14px;
+      display: flex; flex-direction: column; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .ring-sub { font-size: 9.5px; color: #9CA3AF; margin-top: 5px; }
+
+    .period-label {
+      font-size: 9px; font-weight: 600; color: #9CA3AF;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px; padding-left: 2px;
+    }
+
+    .med-item {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff; border-radius: 12px;
+      padding: 8px 10px; margin-bottom: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .med-dot {
+      width: 30px; height: 30px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 13px;
+    }
+
+    .med-info { flex: 1; }
+    .med-name { font-size: 10.5px; font-weight: 600; color: #111827; }
+    .med-dose { font-size: 9px; color: #9CA3AF; margin-top: 1px; }
+
+    .med-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      flex-shrink: 0; border: 2px solid var(--border);
+    }
+
+    .med-check.done {
+      background: #22C55E; border-color: #22C55E;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────────── */
+    .how-section { background: #fff; padding: 88px 24px; }
+
+    .section-inner { max-width: 860px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); text-align: center; margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; color: #111827;
+      text-align: center; margin-bottom: 56px; line-height: 1.2;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    @media (min-width: 640px) {
+      .steps-grid::before {
+        content: '';
+        position: absolute;
+        top: 28px; left: calc(33.33%); right: calc(33.33%);
+        height: 1px;
+        background: var(--border);
+        z-index: 0;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .step { text-align: center; position: relative; z-index: 1; }
+
+    .step-num {
+      width: 56px; height: 56px;
+      background: var(--light);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #111827; margin-bottom: 8px;
+    }
+
+    .step p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── FEATURES ─────────────────────────────────────────────────── */
+    .features-section { background: var(--light); padding: 88px 24px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 500px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card { background: #fff; border-radius: 22px; padding: 28px 24px; }
+
+    .feature-icon {
+      width: 50px; height: 50px;
+      background: #EFF6FF; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #111827; margin-bottom: 8px;
+    }
+
+    .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.65; }
+
+    /* ── PRICING ──────────────────────────────────────────────────── */
+    .pricing-section { background: var(--black); padding: 88px 24px; }
+    .pricing-section .section-tag  { color: #60A5FA; }
+    .pricing-section .section-title { color: #fff; }
+
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 620px; margin: 0 auto;
+    }
+
+    @media (max-width: 520px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 320px; }
+    }
+
+    .pricing-card {
+      background: #141420; border: 1px solid #2a2a40;
+      border-radius: 24px; padding: 32px 24px 28px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+
+    .pricing-card.featured { background: var(--blue); border-color: var(--blue); }
+
+    .badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: #FBBF24; color: #000;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 4px 14px; border-radius: 20px; white-space: nowrap;
+    }
+
+    .plan-name {
+      font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); margin-bottom: 10px;
+    }
+
+    .plan-price {
+      font-family: 'Sora', sans-serif; font-size: 2.6rem; font-weight: 800;
+      color: #fff; line-height: 1; margin-bottom: 4px;
+    }
+
+    .plan-period { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+
+    .plan-features {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      flex: 1; margin-bottom: 28px;
+    }
+
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.4;
+    }
+
+    .plan-features li::before { content: '✓'; color: #4ADE80; font-weight: 700; flex-shrink: 0; }
+    .pricing-card.featured .plan-features li::before { color: rgba(255,255,255,0.95); }
+
+    .plan-soon {
+      font-size: 0.65rem; font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px; padding: 1px 5px;
+      margin-left: 4px; vertical-align: middle;
+    }
+
+    .pricing-card.featured .plan-soon {
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .btn-plan {
+      display: block; text-align: center; text-decoration: none;
+      padding: 13px 20px; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      transition: opacity 0.18s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-plan:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-plan:active { transform: translateY(0); }
+
+    .pricing-card:not(.featured) .btn-plan {
+      background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .pricing-card.featured .btn-plan { background: #fff; color: var(--blue); }
+
+    .pricing-note {
+      text-align: center; margin-top: 24px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+    }
+
+    /* ── FAQ ──────────────────────────────────────────────────────── */
+    .faq-section { background: #fff; padding: 88px 24px; }
+
+    .faq-list { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
+    .faq-item summary {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 4px; cursor: pointer;
+      font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
+      color: #111827; list-style: none; user-select: none;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border-radius: 50%; background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 1rem; font-weight: 300;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    details[open] .faq-icon { transform: rotate(45deg); background: var(--blue); color: #fff; }
+
+    .faq-body { padding: 0 4px 18px; font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── CTA ──────────────────────────────────────────────────────── */
+    .cta-section { background: var(--light); padding: 96px 24px; text-align: center; }
+
+    .cta-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800;
+      color: #111827; margin-bottom: 14px;
+    }
+
+    .cta-section > p {
+      font-size: 1rem; color: var(--gray); margin-bottom: 36px;
+      max-width: 380px; margin-left: auto; margin-right: auto;
+    }
+
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 16px 32px; border-radius: 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+      transition: background 0.18s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .cta-trust { font-size: 0.78rem; color: #9CA3AF; }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      padding: 32px 24px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center;
+    }
+
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.875rem; color: var(--gray); text-decoration: none; }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-copy { font-size: 0.8rem; color: #9CA3AF; }
+
+    /* ── Mobile ───────────────────────────────────────────────────── */
+    @media (max-width: 400px) {
+      .hero { padding: 48px 16px 128px; }
+      .phone { width: 240px; }
+      .streak-badge { right: -16px; top: 48px; }
+      .trust-bar { gap: 10px 16px; }
+      .lang-switcher { top: 12px; right: 12px; }
+    }
+
+    @media (max-width: 360px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.65rem; }
+    }
+
+    @media (max-width: 639px) {
+      .btn-appstore, .btn-primary, .btn-plan { min-height: 48px; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-input {
+        height: 58px;
+        min-height: 58px;
+        padding: 0 18px;
+        font-size: 16px;
+      }
+      .btn-waitlist { width: 100%; }
+      .faq-item summary { padding: 20px 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+
+  <main id="main">
+
+    <!-- ── HERO ───────────────────────────────────────────────────── -->
+    <header class="hero">
+
+      <nav class="lang-switcher" aria-label="Seletor de idioma">
+        <a href="/" class="lang-opt" lang="en" aria-label="English version">🇺🇸 EN</a>
+        <a href="/pt/" class="lang-opt active" lang="pt-BR" aria-label="Versão em Português" aria-current="page">🇧🇷 PT</a>
+      </nav>
+
+      <img
+        src="../icon.png"
+        class="hero-logo"
+        alt="Dozr — app de rastreamento de suplementos"
+        width="88" height="88"
+        fetchpriority="high"
+      />
+      <span class="launch-pill">Lista privada de lançamento para iPhone</span>
+      <h1>Crie o hábito de tomar seus medicamentos e suplementos sem abrir mão da privacidade.</h1>
+      <p>O Dozr chega em breve ao iPhone com lembretes no horário certo, registro por toque, streak de aderência e histórico 100% offline.</p>
+      <div class="hero-cta-wrap" id="waitlist">
+        <form name="waitlist-pt" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/_forms" class="waitlist-form" data-track="waitlist_form_hero_pt" data-waitlist-form data-success-event="waitlist_success_pt">
+          <input type="hidden" name="form-name" value="waitlist-pt" />
+          <p class="sr-only">
+            <label>Não preencha este campo: <input name="bot-field" /></label>
+          </p>
+          <label class="sr-only" for="email-pt">Email</label>
+          <input id="email-pt" class="waitlist-input" type="email" name="email" placeholder="seu@email.com" autocomplete="email" required />
+          <button class="btn-waitlist" type="submit">Entrar na lista</button>
+        </form>
+        <p class="success-message" data-success-message>Você está na lista. Vamos avisar quando o Dozr estiver pronto.</p>
+        <p class="success-message" data-error-message>Algo deu errado. Tente novamente em alguns instantes.</p>
+        <span class="hero-trust">Sem spam &nbsp;·&nbsp; Só avisos do lançamento &nbsp;·&nbsp; Primeiro no iPhone</span>
+        <p class="form-note">Vamos avisar quando o Dozr estiver disponível na App Store e podemos convidar um grupo pequeno para testar antes.</p>
+      </div>
+    </header>
+
+    <!-- ── TRUST BAR ──────────────────────────────────────────────── -->
+    <section class="trust-bar" aria-label="Diferenciais">
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12.1L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5L8 1Z" stroke="#0F62FE" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        100% offline
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="3" y="7" width="10" height="8" rx="2" stroke="#0F62FE" stroke-width="1.5"/>
+          <path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="#0F62FE" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Sem cadastro
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.5" stroke="#0F62FE" stroke-width="1.5"/>
+          <path d="M5 8l2.5 2.5L11 5.5" stroke="#0F62FE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Grátis para baixar
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 9 5 9s5-5.5 5-9c0-2.8-2.2-5-5-5z" stroke="#0F62FE" stroke-width="1.5"/>
+          <circle cx="8" cy="7" r="1.5" stroke="#0F62FE" stroke-width="1.5"/>
+        </svg>
+        iOS 17+
+      </span>
+    </section>
+
+    <!-- ── MOCKUP ──────────────────────────────────────────────────── -->
+    <section class="mockup-section" aria-label="Prévia do app">
+      <div class="mockup-caption">
+        <h2>Um hábito começa com um toque</h2>
+        <p>Tela limpa. Registro rápido. Sem distrações.</p>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="phone" role="img" aria-label="Screenshot da tela inicial do Dozr mostrando 3 de 4 suplementos tomados hoje">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-screen">
+
+              <div class="app-header">
+                <span class="app-title">Hoje</span>
+                <span class="app-date">Sex, 16 mai</span>
+              </div>
+
+              <div class="progress-wrap">
+                <svg width="76" height="76" viewBox="0 0 76 76" aria-hidden="true">
+                  <circle cx="38" cy="38" r="30" fill="none" stroke="#F3F4F6" stroke-width="6"/>
+                  <circle cx="38" cy="38" r="30" fill="none" stroke="#3B82F6" stroke-width="6"
+                    stroke-dasharray="188.5" stroke-dashoffset="47.1"
+                    stroke-linecap="round" transform="rotate(-90 38 38)"/>
+                  <text x="38" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#111827" font-family="Sora,sans-serif">3/4</text>
+                  <text x="38" y="48" text-anchor="middle" font-size="8.5" fill="#9CA3AF" font-family="DM Sans,sans-serif">tomados</text>
+                </svg>
+                <span class="ring-sub">Progresso de hoje</span>
+              </div>
+
+              <p class="period-label">Manhã</p>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#DBEAFE;">☀️</div>
+                <div class="med-info">
+                  <div class="med-name">Vitamina D</div>
+                  <div class="med-dose">2000 UI · 08:00</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#D1FAE5;">🐟</div>
+                <div class="med-info">
+                  <div class="med-name">Ômega 3</div>
+                  <div class="med-dose">1 g · 08:00</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <p class="period-label" style="margin-top:10px;">Noite</p>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#EDE9FE;">💪</div>
+                <div class="med-info">
+                  <div class="med-name">Creatina</div>
+                  <div class="med-dose">5 g · 22:00</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#FEF3C7;">🌙</div>
+                <div class="med-info">
+                  <div class="med-name">Magnésio</div>
+                  <div class="med-dose">400 mg · 22:00</div>
+                </div>
+                <div class="med-check"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="streak-badge" aria-hidden="true">
+          <span class="streak-badge-emoji">🔥</span>
+          <div>
+            <div class="streak-num">18</div>
+            <div class="streak-lbl">dias seguidos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
+    <section class="how-section">
+      <div class="section-inner">
+        <p class="section-tag">Como funciona</p>
+        <h2 class="section-title">Do zero ao hábito em 3 passos</h2>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>Adicione seus itens</h3>
+            <p>Nome, dose e horário em menos de 1 minuto. Vitaminas, suplementos ou medicamentos — qualquer coisa que você precisa lembrar.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>Receba o lembrete</h3>
+            <p>Notificação pontual, todo dia, no horário exato que você configurou. Sem depender de memória.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>Marque como tomado</h3>
+            <p>Um toque. Histórico atualizado. Streak cresce. Com o tempo, o hábito se forma sozinho.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES ───────────────────────────────────────────────── -->
+    <section class="features-section">
+      <div class="section-inner">
+        <p class="section-tag">Funcionalidades</p>
+        <h2 class="section-title">Tudo que você precisa para não falhar</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔔</div>
+            <h3>O lembrete certo, na hora certa</h3>
+            <p>Configure horários únicos para cada suplemento. O Dozr te avisa. Você só precisa aparecer.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📊</div>
+            <h3>Veja onde você acertou e falhou</h3>
+            <p>Calendário visual e gráfico de 14 dias mostram exatamente sua consistência — sem esconder a realidade.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔥</div>
+            <h3>O streak que mantém o hábito</h3>
+            <p>Dias consecutivos de 100% de aderência. Quebre o streak e você vai querer recuperar imediatamente.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔒</div>
+            <h3>Zero nuvem, zero conta</h3>
+            <p>Tudo fica no seu iPhone. Sem servidor, sem rastreamento, sem empresa acessando seu histórico de saúde.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ────────────────────────────────────────────────── -->
+    <section class="pricing-section">
+      <div class="section-inner">
+        <p class="section-tag">Planos</p>
+        <h2 class="section-title">Gratuito para começar.<br>Pro para quem leva a sério.</h2>
+        <div class="pricing-grid">
+
+          <div class="pricing-card">
+            <p class="plan-name">Free</p>
+            <p class="plan-price" style="font-size:2rem;">Grátis</p>
+            <p class="plan-period">para sempre</p>
+            <ul class="plan-features">
+              <li>Até 5 suplementos</li>
+              <li>Histórico dos últimos 7 dias</li>
+              <li>Lembretes diários</li>
+            </ul>
+            <a href="#waitlist" class="btn-plan" data-track="pricing_free_waitlist_pt">Entrar na lista</a>
+          </div>
+
+          <div class="pricing-card featured">
+            <span class="badge">Mais popular</span>
+            <p class="plan-name">Pro</p>
+            <p class="plan-price">R$9,90</p>
+            <p class="plan-period">por mês · ou R$79,90/ano — economize 33%</p>
+            <ul class="plan-features">
+              <li>Suplementos ilimitados</li>
+              <li>Histórico completo</li>
+              <li>Exportação PDF <span class="plan-soon">em breve</span></li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a href="#waitlist" class="btn-plan" data-track="pricing_pro_waitlist_pt">Receber aviso</a>
+          </div>
+
+        </div>
+        <p class="pricing-note">Cancele quando quiser &nbsp;·&nbsp; Gerenciado pelo iPhone</p>
+      </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────────────── -->
+    <section class="faq-section">
+      <div class="section-inner">
+        <p class="section-tag">Dúvidas</p>
+        <h2 class="section-title">Perguntas frequentes</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>
+              Preciso criar uma conta?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">Não. Zero cadastro. O Dozr funciona completamente offline — seus dados ficam no iPhone e nunca saem dele.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Funciona para medicamentos prescritos?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">Para qualquer coisa que você precisa tomar regularmente: remédios, vitaminas, suplementos ou fitoterápicos. O Dozr não é um aplicativo médico — é uma ferramenta de organização e hábito.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Quantos suplementos posso adicionar gratuitamente?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">No plano gratuito você pode adicionar até 5 itens — suficiente para a maioria das rotinas. Para rotinas mais completas, o plano Pro oferece itens ilimitados.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Meus dados ficam seguros?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">100%. Nenhum dado sai do seu dispositivo. Sem nuvem, sem conta, sem empresa acessando seu histórico. Seus hábitos de saúde são privados.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Como cancelo o Pro?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">Pelo próprio iPhone: Ajustes &rarr; [seu nome] &rarr; Assinaturas &rarr; Dozr Pro. Cancele a qualquer momento, sem burocracia. A assinatura fica ativa até o fim do período pago.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────────────────────── -->
+    <section class="cta-section">
+      <h2>Seu próximo streak começa no lançamento.</h2>
+      <p>Entre na lista e avisaremos quando o Dozr estiver disponível para iPhone.</p>
+      <div class="cta-wrap">
+        <a href="#waitlist" class="btn-primary" data-track="footer_waitlist_pt">Entrar na Lista de Lançamento</a>
+        <span class="cta-trust">Plano grátis no lançamento &nbsp;·&nbsp; Sem cadastro &nbsp;·&nbsp; Apenas no iPhone</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────── -->
+  <footer>
+    <nav class="footer-links" aria-label="Links legais">
+      <a href="https://dozr.app/privacy-policy">Política de Privacidade</a>
+      <a href="https://dozr.app/terms-of-use">Termos de Uso</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Dozr. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function trackEvent(name) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: name });
+      if (typeof window.gtag === 'function') window.gtag('event', name);
+      if (typeof window.plausible === 'function') window.plausible(name);
+    }
+
+    function encodeFormData(form) {
+      return new URLSearchParams(new FormData(form)).toString();
+    }
+
+    document.querySelectorAll('[data-waitlist-form]').forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var button = form.querySelector('button[type="submit"]');
+        var successMessage = form.parentElement.querySelector('[data-success-message]');
+        var errorMessage = form.parentElement.querySelector('[data-error-message]');
+        var successEvent = form.getAttribute('data-success-event') || 'waitlist_success_pt';
+
+        if (successMessage) successMessage.classList.remove('is-visible');
+        if (errorMessage) errorMessage.classList.remove('is-visible');
+        if (button) {
+          button.disabled = true;
+          button.textContent = 'Entrando...';
+        }
+
+        fetch(form.getAttribute('action') || '/_forms', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encodeFormData(form),
+        })
+          .then(function(response) {
+            if (!response.ok) throw new Error('Form submit failed');
+            form.reset();
+            if (successMessage) successMessage.classList.add('is-visible');
+            trackEvent(successEvent);
+          })
+          .catch(function() {
+            if (errorMessage) errorMessage.classList.add('is-visible');
+          })
+          .finally(function() {
+            if (button) {
+              button.disabled = false;
+              button.textContent = 'Entrar na lista';
+            }
+          });
+      });
+    });
+
+    document.querySelectorAll('[data-track]').forEach(function(el) {
+      var eventName = el.getAttribute('data-track');
+      if (!eventName) return;
+      el.addEventListener(el.tagName === 'FORM' ? 'submit' : 'click', function() {
+        trackEvent(eventName);
+      });
+    });
+
+    if (new URLSearchParams(window.location.search).get('joined') === '1') {
+      document.querySelectorAll('[data-success-message]').forEach(function(el) {
+        el.classList.add('is-visible');
+      });
+      trackEvent('waitlist_success_pt');
+    }
+  </script>
+
+</body>
+</html>

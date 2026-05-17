@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO ───────────────────────────────────────────────────────── -->
+  <title>Dozr — Supplement &amp; Medication Tracker for iPhone</title>
+  <meta name="description" content="Dozr is a private iPhone tracker for medications, vitamins and supplements. Join the launch list for smart reminders, streak tracking and offline adherence history." />
+  <link rel="canonical" href="https://dozr.app/" />
+
+  <!-- Hreflang ──────────────────────────────────────────────────── -->
+  <link rel="alternate" hreflang="en"    href="https://dozr.app/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://dozr.app/pt/" />
+  <link rel="alternate" hreflang="x-default" href="https://dozr.app/" />
+
+  <!-- Open Graph ────────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://dozr.app/" />
+  <meta property="og:title"       content="Dozr — Never miss a supplement again" />
+  <meta property="og:description" content="Private daily reminders, streak tracking and adherence history for iPhone. Join the Dozr launch list." />
+  <meta property="og:image"       content="https://dozr.app/icon.png" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card ──────────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Dozr — Never miss a supplement again" />
+  <meta name="twitter:description" content="Private daily reminders, streak tracking and adherence history for iPhone. Join the launch list." />
+  <meta name="twitter:image"       content="https://dozr.app/icon.png" />
+
+  <!-- Icons ─────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="apple-touch-icon"      href="icon.png" />
+
+  <!-- Fonts ─────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <!-- SoftwareApplication JSON-LD ───────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dozr",
+    "operatingSystem": "iOS",
+    "applicationCategory": "HealthApplication",
+    "offers": [
+      { "@type": "Offer", "name": "Dozr Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Dozr Pro Monthly", "price": "4.99", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Dozr Pro Annual", "price": "29.99", "priceCurrency": "USD" }
+    ],
+    "description": "Set up your medications and vitamins once. Dozr reminds you every day, logs each dose and shows your full adherence history.",
+    "url": "https://dozr.app"
+  }
+  </script>
+
+  <!-- FAQPage JSON-LD ───────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need to create an account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No account needed. Dozr works completely offline — your data stays on your iPhone and never leaves it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for prescription medications?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For anything you need to take regularly: prescriptions, vitamins, supplements, or herbal remedies. Dozr is not a medical app — it is a habit and organization tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many supplements can I add for free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The free plan allows up to 5 items — enough for most routines. For more complex setups, Pro offers unlimited items." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I cancel Pro?",
+        "acceptedAnswer": { "@type": "Answer", "text": "On your iPhone: Settings → [your name] → Subscriptions → Dozr Pro. Cancel anytime, no hassle. The subscription stays active until the end of the paid period." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Reset & Variables ────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #0F62FE;
+      --blue-dark: #0043CE;
+      --black:     #0a0a0a;
+      --light:     #F4F7FF;
+      --gray:      #6B7280;
+      --border:    #E5E7EB;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      color: #111827;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Skip link (a11y) ─────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      z-index: 999;
+      padding: 8px 16px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.875rem;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 0; }
+
+    /* ── Lang switcher ────────────────────────────────────────────── */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-opt {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 7px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: rgba(255,255,255,0.65);
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+    }
+
+    .lang-opt.active {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .lang-opt:hover:not(.active) { color: #fff; }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    .hero {
+      background: var(--blue);
+      position: relative;
+      padding: 64px 24px 148px;
+      text-align: center;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -5%;
+      width: 110%; height: 100px;
+      background: var(--light);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      z-index: 1;
+    }
+
+    .hero > :not(.lang-switcher) { position: relative; z-index: 2; }
+    .lang-switcher { position: absolute; z-index: 10; }
+
+    .hero-logo {
+      width: 88px; height: 88px;
+      border-radius: 22px;
+      display: block;
+      margin: 0 auto 28px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+
+    .launch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 999px;
+      padding: 7px 14px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.75rem, 5.5vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: rgba(255,255,255,0.85);
+      max-width: 440px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .btn-appstore {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #000; color: #fff;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 14px;
+      transition: transform 0.15s, opacity 0.15s;
+      cursor: pointer;
+    }
+    .btn-appstore:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-appstore:active { transform: translateY(0); }
+
+    .btn-appstore-text { display: flex; flex-direction: column; text-align: left; line-height: 1.2; }
+    .btn-appstore-text small  { font-size: 0.65rem; font-weight: 400; opacity: 0.72; }
+    .btn-appstore-text strong { font-size: 1rem; font-weight: 700; }
+
+    .hero-trust {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.02em;
+    }
+
+    .waitlist-form {
+      display: flex;
+      width: min(100%, 480px);
+      margin: 0 auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .waitlist-input {
+      min-width: 0;
+      flex: 1;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px;
+      padding: 0 16px;
+      background: rgba(255,255,255,0.96);
+      color: #111827;
+      font: 500 0.95rem 'DM Sans', -apple-system, sans-serif;
+      outline: none;
+    }
+
+    .waitlist-input::placeholder { color: #9CA3AF; }
+    .waitlist-input:focus {
+      border-color: #fff;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+    }
+
+    .btn-waitlist {
+      height: 52px;
+      border: 0;
+      border-radius: 14px;
+      padding: 0 22px;
+      background: #000;
+      color: #fff;
+      font: 700 0.95rem 'DM Sans', -apple-system, sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    .btn-waitlist:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-waitlist:active { transform: translateY(0); }
+
+    .form-note {
+      max-width: 420px;
+      margin: 0 auto;
+      font-size: 0.75rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .success-message {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .success-message.is-visible { display: block; }
+
+    /* ── TRUST BAR ────────────────────────────────────────────────── */
+    .trust-bar {
+      background: var(--light);
+      padding: 20px 24px 40px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+
+    .trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    .trust-item svg { flex-shrink: 0; }
+
+    /* ── MOCKUP ───────────────────────────────────────────────────── */
+    .mockup-section {
+      background: var(--light);
+      padding: 0 24px 88px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .mockup-caption { text-align: center; }
+
+    .mockup-caption h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .mockup-caption p { font-size: 0.95rem; color: var(--gray); }
+
+    .mockup-wrap { position: relative; display: inline-block; }
+
+    .streak-badge {
+      position: absolute;
+      top: 56px;
+      right: -44px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+      pointer-events: none;
+    }
+
+    .streak-badge-emoji { font-size: 1.3rem; line-height: 1; }
+    .streak-num { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: #111827; line-height: 1; }
+    .streak-lbl { font-size: 0.62rem; color: var(--gray); margin-top: 2px; white-space: nowrap; }
+
+    .phone {
+      width: 264px;
+      background: #1C1C1E;
+      border-radius: 46px;
+      padding: 14px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .phone-notch {
+      width: 88px; height: 28px;
+      background: #1C1C1E;
+      border-radius: 0 0 22px 22px;
+      margin: 0 auto;
+    }
+
+    .phone-screen { background: #F9FAFB; border-radius: 34px; overflow: hidden; }
+    .app-screen   { padding: 10px 14px 20px; }
+
+    .app-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 14px; padding-top: 4px;
+    }
+
+    .app-title { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: #111827; }
+    .app-date  { font-size: 10px; color: #9CA3AF; }
+
+    .progress-wrap {
+      background: #fff; border-radius: 16px; padding: 14px;
+      margin-bottom: 14px;
+      display: flex; flex-direction: column; align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .ring-sub { font-size: 9.5px; color: #9CA3AF; margin-top: 5px; }
+
+    .period-label {
+      font-size: 9px; font-weight: 600; color: #9CA3AF;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px; padding-left: 2px;
+    }
+
+    .med-item {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff; border-radius: 12px;
+      padding: 8px 10px; margin-bottom: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .med-dot {
+      width: 30px; height: 30px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 13px;
+    }
+
+    .med-info { flex: 1; }
+    .med-name { font-size: 10.5px; font-weight: 600; color: #111827; }
+    .med-dose { font-size: 9px; color: #9CA3AF; margin-top: 1px; }
+
+    .med-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      flex-shrink: 0; border: 2px solid var(--border);
+    }
+
+    .med-check.done {
+      background: #22C55E; border-color: #22C55E;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────────── */
+    .how-section { background: #fff; padding: 88px 24px; }
+
+    .section-inner { max-width: 860px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); text-align: center; margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; color: #111827;
+      text-align: center; margin-bottom: 56px; line-height: 1.2;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    @media (min-width: 640px) {
+      .steps-grid::before {
+        content: '';
+        position: absolute;
+        top: 28px; left: calc(33.33%); right: calc(33.33%);
+        height: 1px;
+        background: var(--border);
+        z-index: 0;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .step { text-align: center; position: relative; z-index: 1; }
+
+    .step-num {
+      width: 56px; height: 56px;
+      background: var(--light);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #111827; margin-bottom: 8px;
+    }
+
+    .step p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── FEATURES ─────────────────────────────────────────────────── */
+    .features-section { background: var(--light); padding: 88px 24px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 500px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card { background: #fff; border-radius: 22px; padding: 28px 24px; }
+
+    .feature-icon {
+      width: 50px; height: 50px;
+      background: #EFF6FF; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #111827; margin-bottom: 8px;
+    }
+
+    .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.65; }
+
+    /* ── PRICING ──────────────────────────────────────────────────── */
+    .pricing-section { background: var(--black); padding: 88px 24px; }
+    .pricing-section .section-tag  { color: #60A5FA; }
+    .pricing-section .section-title { color: #fff; }
+
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 620px; margin: 0 auto;
+    }
+
+    @media (max-width: 520px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 320px; }
+    }
+
+    .pricing-card {
+      background: #141420; border: 1px solid #2a2a40;
+      border-radius: 24px; padding: 32px 24px 28px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+
+    .pricing-card.featured { background: var(--blue); border-color: var(--blue); }
+
+    .badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: #FBBF24; color: #000;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 4px 14px; border-radius: 20px; white-space: nowrap;
+    }
+
+    .plan-name {
+      font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); margin-bottom: 10px;
+    }
+
+    .plan-price {
+      font-family: 'Sora', sans-serif; font-size: 2.6rem; font-weight: 800;
+      color: #fff; line-height: 1; margin-bottom: 4px;
+    }
+
+    .plan-period { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+
+    .plan-features {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      flex: 1; margin-bottom: 28px;
+    }
+
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.4;
+    }
+
+    .plan-features li::before { content: '✓'; color: #4ADE80; font-weight: 700; flex-shrink: 0; }
+    .pricing-card.featured .plan-features li::before { color: rgba(255,255,255,0.95); }
+
+    .plan-soon {
+      font-size: 0.65rem; font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px; padding: 1px 5px;
+      margin-left: 4px; vertical-align: middle;
+    }
+
+    .pricing-card.featured .plan-soon {
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .btn-plan {
+      display: block; text-align: center; text-decoration: none;
+      padding: 13px 20px; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      transition: opacity 0.18s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-plan:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-plan:active { transform: translateY(0); }
+
+    .pricing-card:not(.featured) .btn-plan {
+      background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .pricing-card.featured .btn-plan { background: #fff; color: var(--blue); }
+
+    .pricing-note {
+      text-align: center; margin-top: 24px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+    }
+
+    /* ── FAQ ──────────────────────────────────────────────────────── */
+    .faq-section { background: #fff; padding: 88px 24px; }
+
+    .faq-list { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
+    .faq-item summary {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 4px; cursor: pointer;
+      font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
+      color: #111827; list-style: none; user-select: none;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border-radius: 50%; background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 1rem; font-weight: 300;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    details[open] .faq-icon { transform: rotate(45deg); background: var(--blue); color: #fff; }
+
+    .faq-body { padding: 0 4px 18px; font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── CTA ──────────────────────────────────────────────────────── */
+    .cta-section { background: var(--light); padding: 96px 24px; text-align: center; }
+
+    .cta-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800;
+      color: #111827; margin-bottom: 14px;
+    }
+
+    .cta-section > p {
+      font-size: 1rem; color: var(--gray); margin-bottom: 36px;
+      max-width: 380px; margin-left: auto; margin-right: auto;
+    }
+
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 16px 32px; border-radius: 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+      transition: background 0.18s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .cta-trust { font-size: 0.78rem; color: #9CA3AF; }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      padding: 32px 24px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center;
+    }
+
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.875rem; color: var(--gray); text-decoration: none; }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-copy { font-size: 0.8rem; color: #9CA3AF; }
+
+    /* ── Mobile ───────────────────────────────────────────────────── */
+    @media (max-width: 400px) {
+      .hero { padding: 48px 16px 128px; }
+      .phone { width: 240px; }
+      .streak-badge { right: -16px; top: 48px; }
+      .trust-bar { gap: 10px 16px; }
+      .lang-switcher { top: 12px; right: 12px; }
+    }
+
+    @media (max-width: 360px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.65rem; }
+    }
+
+    @media (max-width: 639px) {
+      .btn-appstore, .btn-primary, .btn-plan { min-height: 48px; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-input {
+        height: 58px;
+        min-height: 58px;
+        padding: 0 18px;
+        font-size: 16px;
+      }
+      .btn-waitlist { width: 100%; }
+      .faq-item summary { padding: 20px 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <main id="main">
+
+    <!-- ── HERO ───────────────────────────────────────────────────── -->
+    <header class="hero">
+
+      <nav class="lang-switcher" aria-label="Language selector">
+        <a href="/" class="lang-opt active" lang="en" aria-label="English version" aria-current="page">🇺🇸 EN</a>
+        <a href="/pt/" class="lang-opt" lang="pt-BR" aria-label="Versão em Português">🇧🇷 PT</a>
+      </nav>
+
+      <img
+        src="icon.png"
+        class="hero-logo"
+        alt="Dozr — supplement and medication tracker"
+        width="88" height="88"
+        fetchpriority="high"
+      />
+      <span class="launch-pill">Private iPhone launch list</span>
+      <h1>Build your medication and supplement habit without giving up your privacy.</h1>
+      <p>Dozr is launching soon for iPhone: precise reminders, one-tap logging, streak tracking and offline adherence history.</p>
+      <div class="hero-cta-wrap" id="waitlist">
+        <form name="waitlist-en" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/_forms" class="waitlist-form" data-track="waitlist_form_hero" data-waitlist-form data-success-event="waitlist_success">
+          <input type="hidden" name="form-name" value="waitlist-en" />
+          <p class="sr-only">
+            <label>Do not fill this out: <input name="bot-field" /></label>
+          </p>
+          <label class="sr-only" for="email-en">Email address</label>
+          <input id="email-en" class="waitlist-input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+          <button class="btn-waitlist" type="submit">Join the launch list</button>
+        </form>
+        <p class="success-message" data-success-message>You're on the list. We will email you when Dozr is ready.</p>
+        <p class="success-message" data-error-message>Something went wrong. Please try again in a moment.</p>
+        <span class="hero-trust">No spam &nbsp;·&nbsp; Launch updates only &nbsp;·&nbsp; iPhone first</span>
+        <p class="form-note">We will email you when Dozr is ready on the App Store and may invite a small group to early testing.</p>
+      </div>
+    </header>
+
+    <!-- ── TRUST BAR ──────────────────────────────────────────────── -->
+    <section class="trust-bar" aria-label="Trust signals">
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12.1L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5L8 1Z" stroke="#0F62FE" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        100% Offline
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="3" y="7" width="10" height="8" rx="2" stroke="#0F62FE" stroke-width="1.5"/>
+          <path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="#0F62FE" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        No Sign-up
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.5" stroke="#0F62FE" stroke-width="1.5"/>
+          <path d="M5 8l2.5 2.5L11 5.5" stroke="#0F62FE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Free to Download
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 9 5 9s5-5.5 5-9c0-2.8-2.2-5-5-5z" stroke="#0F62FE" stroke-width="1.5"/>
+          <circle cx="8" cy="7" r="1.5" stroke="#0F62FE" stroke-width="1.5"/>
+        </svg>
+        iOS 17+
+      </span>
+    </section>
+
+    <!-- ── MOCKUP ──────────────────────────────────────────────────── -->
+    <section class="mockup-section" aria-label="App preview">
+      <div class="mockup-caption">
+        <h2>A habit starts with one tap</h2>
+        <p>Clean screen. Quick check-in. No friction.</p>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="phone" role="img" aria-label="Dozr home screen showing 3 of 4 supplements taken today">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-screen">
+
+              <div class="app-header">
+                <span class="app-title">Today</span>
+                <span class="app-date">Fri, May 16</span>
+              </div>
+
+              <div class="progress-wrap">
+                <svg width="76" height="76" viewBox="0 0 76 76" aria-hidden="true">
+                  <circle cx="38" cy="38" r="30" fill="none" stroke="#F3F4F6" stroke-width="6"/>
+                  <circle cx="38" cy="38" r="30" fill="none" stroke="#3B82F6" stroke-width="6"
+                    stroke-dasharray="188.5" stroke-dashoffset="47.1"
+                    stroke-linecap="round" transform="rotate(-90 38 38)"/>
+                  <text x="38" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#111827" font-family="Sora,sans-serif">3/4</text>
+                  <text x="38" y="48" text-anchor="middle" font-size="8.5" fill="#9CA3AF" font-family="DM Sans,sans-serif">taken</text>
+                </svg>
+                <span class="ring-sub">Today's progress</span>
+              </div>
+
+              <p class="period-label">Morning</p>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#DBEAFE;">☀️</div>
+                <div class="med-info">
+                  <div class="med-name">Vitamin D</div>
+                  <div class="med-dose">2000 IU · 8:00 AM</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#D1FAE5;">🐟</div>
+                <div class="med-info">
+                  <div class="med-name">Omega 3</div>
+                  <div class="med-dose">1 g · 8:00 AM</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <p class="period-label" style="margin-top:10px;">Evening</p>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#EDE9FE;">💪</div>
+                <div class="med-info">
+                  <div class="med-name">Creatine</div>
+                  <div class="med-dose">5 g · 10:00 PM</div>
+                </div>
+                <div class="med-check done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="med-item">
+                <div class="med-dot" style="background:#FEF3C7;">🌙</div>
+                <div class="med-info">
+                  <div class="med-name">Magnesium</div>
+                  <div class="med-dose">400 mg · 10:00 PM</div>
+                </div>
+                <div class="med-check"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="streak-badge" aria-hidden="true">
+          <span class="streak-badge-emoji">🔥</span>
+          <div>
+            <div class="streak-num">18</div>
+            <div class="streak-lbl">day streak</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
+    <section class="how-section">
+      <div class="section-inner">
+        <p class="section-tag">How it works</p>
+        <h2 class="section-title">Zero to habit in 3 steps</h2>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>Add your items</h3>
+            <p>Name, dose, and time in under a minute. Vitamins, supplements, or medications — anything you need to remember.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>Get the reminder</h3>
+            <p>A precise notification, every day, at the exact time you set. No relying on memory.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>Mark it done</h3>
+            <p>One tap. History updated. Streak grows. Over time, the habit forms itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES ───────────────────────────────────────────────── -->
+    <section class="features-section">
+      <div class="section-inner">
+        <p class="section-tag">Features</p>
+        <h2 class="section-title">Everything you need to stay consistent</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔔</div>
+            <h3>The right reminder at the right time</h3>
+            <p>Set individual times for each supplement. Dozr notifies you. You just need to show up.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📊</div>
+            <h3>See exactly where you succeeded and failed</h3>
+            <p>Visual calendar and 14-day chart show your consistency — no hiding the reality.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔥</div>
+            <h3>The streak that keeps the habit alive</h3>
+            <p>Consecutive days of 100% adherence. Break it, and you'll want to get it back immediately.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔒</div>
+            <h3>Zero cloud, zero account</h3>
+            <p>Everything stays on your iPhone. No server, no tracking, no company accessing your health data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ────────────────────────────────────────────────── -->
+    <section class="pricing-section">
+      <div class="section-inner">
+        <p class="section-tag">Pricing</p>
+        <h2 class="section-title">Free to start.<br>Pro for those who are serious.</h2>
+        <div class="pricing-grid">
+
+          <div class="pricing-card">
+            <p class="plan-name">Free</p>
+            <p class="plan-price">$0</p>
+            <p class="plan-period">forever</p>
+            <ul class="plan-features">
+              <li>Up to 5 supplements</li>
+              <li>Last 7 days history</li>
+              <li>Daily reminders</li>
+            </ul>
+            <a href="#waitlist" class="btn-plan" data-track="pricing_free_waitlist">Join Waitlist</a>
+          </div>
+
+          <div class="pricing-card featured">
+            <span class="badge">Most popular</span>
+            <p class="plan-name">Pro</p>
+            <p class="plan-price">$4.99</p>
+            <p class="plan-period">per month · or $29.99/yr — save 50%</p>
+            <ul class="plan-features">
+              <li>Unlimited supplements</li>
+              <li>Full history</li>
+              <li>PDF Export <span class="plan-soon">soon</span></li>
+              <li>Priority support</li>
+            </ul>
+            <a href="#waitlist" class="btn-plan" data-track="pricing_pro_waitlist">Get Launch Notice</a>
+          </div>
+
+        </div>
+        <p class="pricing-note">Cancel anytime &nbsp;·&nbsp; Managed by iPhone</p>
+      </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────────────── -->
+    <section class="faq-section">
+      <div class="section-inner">
+        <p class="section-tag">FAQ</p>
+        <h2 class="section-title">Frequently asked questions</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>
+              Do I need to create an account?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">No account needed. Dozr works completely offline — your data stays on your iPhone and never leaves it.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Does it work for prescription medications?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">For anything you need to take regularly: prescriptions, vitamins, supplements, or herbal remedies. Dozr is not a medical app — it's a habit and organization tool.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              How many supplements can I add for free?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">The free plan allows up to 5 items — enough for most routines. For more complex setups, Pro offers unlimited items.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Is my health data private?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">100%. Nothing leaves your device. No cloud, no account, no company can access your history. Your health habits are yours alone.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              How do I cancel Pro?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-body">On your iPhone: Settings &rarr; [your name] &rarr; Subscriptions &rarr; Dozr Pro. Cancel anytime, no hassle. The subscription stays active until the end of the paid period.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────────────────────── -->
+    <section class="cta-section">
+      <h2>Your next streak starts at launch.</h2>
+      <p>Join the list and we will let you know when Dozr is available for iPhone.</p>
+      <div class="cta-wrap">
+        <a href="#waitlist" class="btn-primary" data-track="footer_waitlist">Join the Launch List</a>
+        <span class="cta-trust">Free plan at launch &nbsp;·&nbsp; No account required &nbsp;·&nbsp; iPhone only</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────── -->
+  <footer>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="https://dozr.app/privacy-policy">Privacy Policy</a>
+      <a href="https://dozr.app/terms-of-use">Terms of Use</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Dozr. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function trackEvent(name) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: name });
+      if (typeof window.gtag === 'function') window.gtag('event', name);
+      if (typeof window.plausible === 'function') window.plausible(name);
+    }
+
+    function encodeFormData(form) {
+      return new URLSearchParams(new FormData(form)).toString();
+    }
+
+    document.querySelectorAll('[data-waitlist-form]').forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var button = form.querySelector('button[type="submit"]');
+        var successMessage = form.parentElement.querySelector('[data-success-message]');
+        var errorMessage = form.parentElement.querySelector('[data-error-message]');
+        var successEvent = form.getAttribute('data-success-event') || 'waitlist_success';
+
+        if (successMessage) successMessage.classList.remove('is-visible');
+        if (errorMessage) errorMessage.classList.remove('is-visible');
+        if (button) {
+          button.disabled = true;
+          button.textContent = 'Joining...';
+        }
+
+        fetch(form.getAttribute('action') || '/_forms', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encodeFormData(form),
+        })
+          .then(function(response) {
+            if (!response.ok) throw new Error('Form submit failed');
+            form.reset();
+            if (successMessage) successMessage.classList.add('is-visible');
+            trackEvent(successEvent);
+          })
+          .catch(function() {
+            if (errorMessage) errorMessage.classList.add('is-visible');
+          })
+          .finally(function() {
+            if (button) {
+              button.disabled = false;
+              button.textContent = 'Join the launch list';
+            }
+          });
+      });
+    });
+
+    document.querySelectorAll('[data-track]').forEach(function(el) {
+      var eventName = el.getAttribute('data-track');
+      if (!eventName) return;
+      el.addEventListener(el.tagName === 'FORM' ? 'submit' : 'click', function() {
+        trackEvent(eventName);
+      });
+    });
+
+    if (new URLSearchParams(window.location.search).get('joined') === '1') {
+      document.querySelectorAll('[data-success-message]').forEach(function(el) {
+        el.classList.add('is-visible');
+      });
+      trackEvent('waitlist_success');
+    }
+  </script>
+
+</body>
+</html>
