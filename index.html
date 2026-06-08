@@ -6,7 +6,7 @@
 
   <!-- SEO ───────────────────────────────────────────────────────── -->
   <title>Dozr — Supplement &amp; Medication Tracker for iPhone</title>
-  <meta name="description" content="Dozr is a private iPhone tracker for medications, vitamins and supplements. Join the launch list for smart reminders, streak tracking and offline adherence history." />
+  <meta name="description" content="Dozr is available now on the App Store: a private iPhone tracker for medications, vitamins and supplements with smart reminders, streak tracking and offline adherence history." />
   <link rel="canonical" href="https://dozr.app/" />
 
   <!-- Hreflang ──────────────────────────────────────────────────── -->
@@ -18,14 +18,14 @@
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://dozr.app/" />
   <meta property="og:title"       content="Dozr — Never miss a supplement again" />
-  <meta property="og:description" content="Private daily reminders, streak tracking and adherence history for iPhone. Join the Dozr launch list." />
+  <meta property="og:description" content="Download Dozr on the App Store for private daily reminders, streak tracking and adherence history on iPhone." />
   <meta property="og:image"       content="https://dozr.app/icon.png" />
   <meta property="og:locale"      content="en_US" />
 
   <!-- Twitter Card ──────────────────────────────────────────────── -->
   <meta name="twitter:card"        content="summary" />
   <meta name="twitter:title"       content="Dozr — Never miss a supplement again" />
-  <meta name="twitter:description" content="Private daily reminders, streak tracking and adherence history for iPhone. Join the launch list." />
+  <meta name="twitter:description" content="Download Dozr on the App Store for private daily reminders, streak tracking and adherence history on iPhone." />
   <meta name="twitter:image"       content="https://dozr.app/icon.png" />
 
   <!-- Icons ─────────────────────────────────────────────────────── -->
@@ -48,10 +48,11 @@
     "offers": [
       { "@type": "Offer", "name": "Dozr Free", "price": "0", "priceCurrency": "USD" },
       { "@type": "Offer", "name": "Dozr Pro Monthly", "price": "4.99", "priceCurrency": "USD" },
-      { "@type": "Offer", "name": "Dozr Pro Annual", "price": "29.99", "priceCurrency": "USD" }
+      { "@type": "Offer", "name": "Dozr Pro Annual", "price": "39.99", "priceCurrency": "USD" }
     ],
     "description": "Set up your medications and vitamins once. Dozr reminds you every day, logs each dose and shows your full adherence history.",
-    "url": "https://dozr.app"
+    "url": "https://dozr.app",
+    "installUrl": "https://apps.apple.com/app/id6771156963"
   }
   </script>
 
@@ -252,72 +253,6 @@
       color: rgba(255,255,255,0.55);
       letter-spacing: 0.02em;
     }
-
-    .waitlist-form {
-      display: flex;
-      width: min(100%, 480px);
-      margin: 0 auto;
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .waitlist-input {
-      min-width: 0;
-      flex: 1;
-      height: 52px;
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 14px;
-      padding: 0 16px;
-      background: rgba(255,255,255,0.96);
-      color: #111827;
-      font: 500 0.95rem 'DM Sans', -apple-system, sans-serif;
-      outline: none;
-    }
-
-    .waitlist-input::placeholder { color: #9CA3AF; }
-    .waitlist-input:focus {
-      border-color: #fff;
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
-    }
-
-    .btn-waitlist {
-      height: 52px;
-      border: 0;
-      border-radius: 14px;
-      padding: 0 22px;
-      background: #000;
-      color: #fff;
-      font: 700 0.95rem 'DM Sans', -apple-system, sans-serif;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.15s, opacity 0.15s;
-    }
-
-    .btn-waitlist:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-waitlist:active { transform: translateY(0); }
-
-    .form-note {
-      max-width: 420px;
-      margin: 0 auto;
-      font-size: 0.75rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.58);
-    }
-
-    .success-message {
-      display: none;
-      max-width: 480px;
-      margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 14px;
-      padding: 12px 16px;
-      background: rgba(255,255,255,0.14);
-      color: #fff;
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .success-message.is-visible { display: block; }
 
     /* ── TRUST BAR ────────────────────────────────────────────────── */
     .trust-bar {
@@ -715,14 +650,6 @@
 
     @media (max-width: 639px) {
       .btn-appstore, .btn-primary, .btn-plan { min-height: 48px; }
-      .waitlist-form { flex-direction: column; }
-      .waitlist-input {
-        height: 58px;
-        min-height: 58px;
-        padding: 0 18px;
-        font-size: 16px;
-      }
-      .btn-waitlist { width: 100%; }
       .faq-item summary { padding: 20px 4px; }
     }
   </style>
@@ -748,23 +675,17 @@
         width="88" height="88"
         fetchpriority="high"
       />
-      <span class="launch-pill">Private iPhone launch list</span>
+      <span class="launch-pill">Now on the App Store</span>
       <h1>Build your medication and supplement habit without giving up your privacy.</h1>
-      <p>Dozr is launching soon for iPhone: precise reminders, one-tap logging, streak tracking and offline adherence history.</p>
+      <p>Dozr is available now for iPhone: precise reminders, one-tap logging, streak tracking and offline adherence history.</p>
       <div class="hero-cta-wrap" id="waitlist">
-        <form name="waitlist-en" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/_forms" class="waitlist-form" data-track="waitlist_form_hero" data-waitlist-form data-success-event="waitlist_success">
-          <input type="hidden" name="form-name" value="waitlist-en" />
-          <p class="sr-only">
-            <label>Do not fill this out: <input name="bot-field" /></label>
-          </p>
-          <label class="sr-only" for="email-en">Email address</label>
-          <input id="email-en" class="waitlist-input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
-          <button class="btn-waitlist" type="submit">Join the launch list</button>
-        </form>
-        <p class="success-message" data-success-message>You're on the list. We will email you when Dozr is ready.</p>
-        <p class="success-message" data-error-message>Something went wrong. Please try again in a moment.</p>
-        <span class="hero-trust">No spam &nbsp;·&nbsp; Launch updates only &nbsp;·&nbsp; iPhone first</span>
-        <p class="form-note">We will email you when Dozr is ready on the App Store and may invite a small group to early testing.</p>
+        <a href="https://apps.apple.com/app/id6771156963" class="btn-appstore" target="_blank" rel="noopener" data-track="appstore_hero">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 12.55c-.03-2.56 2.09-3.79 2.19-3.85-1.2-1.75-3.06-1.99-3.71-2.02-1.56-.16-3.08.93-3.88.93-.82 0-2.06-.91-3.4-.88-1.72.03-3.33 1.02-4.21 2.56-1.82 3.15-.46 7.78 1.28 10.33.87 1.24 1.88 2.63 3.22 2.58 1.31-.05 1.8-.83 3.38-.83 1.56 0 2 .83 3.37.8 1.41-.02 2.29-1.25 3.15-2.5.99-1.42 1.39-2.82 1.41-2.89-.03-.01-2.78-1.06-2.8-4.23zM14.51 5.03c.72-.9 1.22-2.12 1.08-3.35-1.04.05-2.34.72-3.09 1.6-.67.78-1.27 2.05-1.11 3.23 1.17.09 2.36-.59 3.12-1.48z"/>
+          </svg>
+          <span class="btn-appstore-text"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <span class="hero-trust">Free to download &nbsp;·&nbsp; No account required &nbsp;·&nbsp; iPhone only</span>
       </div>
     </header>
 
@@ -966,21 +887,21 @@
               <li>Last 7 days history</li>
               <li>Daily reminders</li>
             </ul>
-            <a href="#waitlist" class="btn-plan" data-track="pricing_free_waitlist">Join Waitlist</a>
+            <a href="https://apps.apple.com/app/id6771156963" class="btn-plan" target="_blank" rel="noopener" data-track="pricing_free_appstore">Download Free</a>
           </div>
 
           <div class="pricing-card featured">
             <span class="badge">Most popular</span>
             <p class="plan-name">Pro</p>
             <p class="plan-price">$4.99</p>
-            <p class="plan-period">per month · or $29.99/yr — save 50%</p>
+            <p class="plan-period">per month · or $39.99/yr — save ~33%</p>
             <ul class="plan-features">
               <li>Unlimited supplements</li>
               <li>Full history</li>
               <li>PDF Export <span class="plan-soon">soon</span></li>
               <li>Priority support</li>
             </ul>
-            <a href="#waitlist" class="btn-plan" data-track="pricing_pro_waitlist">Get Launch Notice</a>
+            <a href="https://apps.apple.com/app/id6771156963" class="btn-plan" target="_blank" rel="noopener" data-track="pricing_pro_appstore">Get Dozr Pro</a>
           </div>
 
         </div>
@@ -1041,11 +962,16 @@
 
     <!-- ── CTA ────────────────────────────────────────────────────── -->
     <section class="cta-section">
-      <h2>Your next streak starts at launch.</h2>
-      <p>Join the list and we will let you know when Dozr is available for iPhone.</p>
+      <h2>Start your streak today.</h2>
+      <p>Download Dozr free on the App Store.</p>
       <div class="cta-wrap">
-        <a href="#waitlist" class="btn-primary" data-track="footer_waitlist">Join the Launch List</a>
-        <span class="cta-trust">Free plan at launch &nbsp;·&nbsp; No account required &nbsp;·&nbsp; iPhone only</span>
+        <a href="https://apps.apple.com/app/id6771156963" class="btn-appstore" target="_blank" rel="noopener" data-track="appstore_footer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 12.55c-.03-2.56 2.09-3.79 2.19-3.85-1.2-1.75-3.06-1.99-3.71-2.02-1.56-.16-3.08.93-3.88.93-.82 0-2.06-.91-3.4-.88-1.72.03-3.33 1.02-4.21 2.56-1.82 3.15-.46 7.78 1.28 10.33.87 1.24 1.88 2.63 3.22 2.58 1.31-.05 1.8-.83 3.38-.83 1.56 0 2 .83 3.37.8 1.41-.02 2.29-1.25 3.15-2.5.99-1.42 1.39-2.82 1.41-2.89-.03-.01-2.78-1.06-2.8-4.23zM14.51 5.03c.72-.9 1.22-2.12 1.08-3.35-1.04.05-2.34.72-3.09 1.6-.67.78-1.27 2.05-1.11 3.23 1.17.09 2.36-.59 3.12-1.48z"/>
+          </svg>
+          <span class="btn-appstore-text"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <span class="cta-trust">Free plan available &nbsp;·&nbsp; No account required &nbsp;·&nbsp; iPhone only</span>
       </div>
     </section>
 
@@ -1068,63 +994,13 @@
       if (typeof window.plausible === 'function') window.plausible(name);
     }
 
-    function encodeFormData(form) {
-      return new URLSearchParams(new FormData(form)).toString();
-    }
-
-    document.querySelectorAll('[data-waitlist-form]').forEach(function(form) {
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var button = form.querySelector('button[type="submit"]');
-        var successMessage = form.parentElement.querySelector('[data-success-message]');
-        var errorMessage = form.parentElement.querySelector('[data-error-message]');
-        var successEvent = form.getAttribute('data-success-event') || 'waitlist_success';
-
-        if (successMessage) successMessage.classList.remove('is-visible');
-        if (errorMessage) errorMessage.classList.remove('is-visible');
-        if (button) {
-          button.disabled = true;
-          button.textContent = 'Joining...';
-        }
-
-        fetch(form.getAttribute('action') || '/_forms', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: encodeFormData(form),
-        })
-          .then(function(response) {
-            if (!response.ok) throw new Error('Form submit failed');
-            form.reset();
-            if (successMessage) successMessage.classList.add('is-visible');
-            trackEvent(successEvent);
-          })
-          .catch(function() {
-            if (errorMessage) errorMessage.classList.add('is-visible');
-          })
-          .finally(function() {
-            if (button) {
-              button.disabled = false;
-              button.textContent = 'Join the launch list';
-            }
-          });
-      });
-    });
-
     document.querySelectorAll('[data-track]').forEach(function(el) {
       var eventName = el.getAttribute('data-track');
       if (!eventName) return;
-      el.addEventListener(el.tagName === 'FORM' ? 'submit' : 'click', function() {
+      el.addEventListener('click', function() {
         trackEvent(eventName);
       });
     });
-
-    if (new URLSearchParams(window.location.search).get('joined') === '1') {
-      document.querySelectorAll('[data-success-message]').forEach(function(el) {
-        el.classList.add('is-visible');
-      });
-      trackEvent('waitlist_success');
-    }
   </script>
 
 </body>
