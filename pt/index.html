@@ -19,14 +19,14 @@
   <meta property="og:url"         content="https://dozr.app/pt/" />
   <meta property="og:title"       content="Dozr — Nunca mais esqueça um suplemento" />
   <meta property="og:description" content="Baixe o Dozr na App Store para lembretes privados, registro por toque e histórico de aderência no iPhone." />
-  <meta property="og:image"       content="https://dozr.app/icon.png" />
+  <meta property="og:image"       content="https://dozr.app/assets/social-preview.png" />
   <meta property="og:locale"      content="pt_BR" />
 
   <!-- Twitter Card ──────────────────────────────────────────────── -->
-  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Dozr — Nunca mais esqueça um suplemento" />
   <meta name="twitter:description" content="Baixe o Dozr na App Store para lembretes privados, registro por toque e histórico de aderência no iPhone." />
-  <meta name="twitter:image"       content="https://dozr.app/icon.png" />
+  <meta name="twitter:image"       content="https://dozr.app/assets/social-preview.png" />
 
   <!-- Icons ─────────────────────────────────────────────────────── -->
   <link rel="icon" type="image/png" href="../icon.png" />
@@ -163,6 +163,7 @@
 
     /* ── HERO ─────────────────────────────────────────────────────── */
     .hero {
+      overflow: hidden;
       background: var(--blue);
       position: relative;
       padding: 64px 24px 148px;
@@ -657,6 +658,22 @@
       .btn-appstore, .btn-primary, .btn-plan { min-height: 48px; }
       .faq-item summary { padding: 20px 4px; }
     }
+
+    @media (min-width: 900px) { .hero { display:grid; grid-template-columns:minmax(0,560px) 280px; justify-content:center; align-items:center; gap:64px; padding-top:80px; } }
+    .real-preview { margin: 32px auto 0; }
+    .real-preview img { display: block; width: 222px; height: 480px; max-width: 100%; margin: auto; border: 6px solid #17233a; border-radius: 30px; box-shadow: 0 18px 45px #10234426; box-sizing: content-box; }
+    .real-preview figcaption { margin-top: 16px; font-size: .8rem; color: #fff; }
+    .mobile-download { display: none; }
+    .guide-links { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin:24px; }
+    a:focus-visible { outline: 3px solid #0f62fe; outline-offset: 5px; }
+    @media (max-width:639px) {
+      body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
+      .mobile-download { display:flex; justify-content:center; position:fixed; bottom:0; left:0; right:0; z-index:20; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:#fffffff5; border-top:1px solid #dce4ee; }
+      .mobile-download a { padding:12px 24px; border-radius:12px; background:#0f62fe; color:white; font-weight:700; text-decoration:none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
   </style>
 </head>
 <body>
@@ -673,6 +690,7 @@
         <a href="/pt/" class="lang-opt active" lang="pt-BR" aria-label="Versão em Português" aria-current="page">🇧🇷 PT</a>
       </nav>
 
+      <div class="hero-content">
       <img
         src="../icon.png"
         class="hero-logo"
@@ -681,8 +699,8 @@
         fetchpriority="high"
       />
       <span class="launch-pill">Agora na App Store</span>
-      <h1>Crie o hábito de tomar seus medicamentos e suplementos sem abrir mão da privacidade.</h1>
-      <p>O Dozr já está disponível para iPhone com lembretes no horário certo, registro por toque, streak de aderência e histórico 100% offline.</p>
+      <h1>Seus lembretes. Sua rotina. Sua privacidade.</h1>
+      <p>Organize medicamentos, vitaminas e suplementos no iPhone. Lembretes diários, registro com um toque e histórico offline.</p>
       <div class="hero-cta-wrap" id="waitlist">
         <a href="https://apps.apple.com/app/id6771156963" class="btn-appstore" target="_blank" rel="noopener" data-track="appstore_hero_pt">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -692,6 +710,7 @@
         </a>
         <span class="hero-trust">Grátis para baixar &nbsp;·&nbsp; Sem cadastro &nbsp;·&nbsp; Apenas no iPhone</span>
       </div>
+</div><figure class="real-preview"><img src="/assets/dozr-today.jpg" width="222" height="480" alt="Tela Hoje do Dozr com três suplementos de exemplo e horários de lembrete." fetchpriority="high" /><figcaption>Tela real da versão publicada (em inglês).</figcaption></figure>
     </header>
 
     <!-- ── TRUST BAR ──────────────────────────────────────────────── -->
@@ -721,105 +740,12 @@
           <path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 9 5 9s5-5.5 5-9c0-2.8-2.2-5-5-5z" stroke="#0F62FE" stroke-width="1.5"/>
           <circle cx="8" cy="7" r="1.5" stroke="#0F62FE" stroke-width="1.5"/>
         </svg>
-        iOS 17+
+        iOS 16.6+
       </span>
     </section>
 
     <!-- ── MOCKUP ──────────────────────────────────────────────────── -->
-    <section class="mockup-section" aria-label="Prévia do app">
-      <div class="mockup-caption">
-        <h2>Um hábito começa com um toque</h2>
-        <p>Tela limpa. Registro rápido. Sem distrações.</p>
-      </div>
 
-      <div class="mockup-wrap">
-        <div class="phone" role="img" aria-label="Screenshot da tela inicial do Dozr mostrando 3 de 4 suplementos tomados hoje">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-screen">
-
-              <div class="app-header">
-                <span class="app-title">Hoje</span>
-                <span class="app-date">Sex, 16 mai</span>
-              </div>
-
-              <div class="progress-wrap">
-                <svg width="76" height="76" viewBox="0 0 76 76" aria-hidden="true">
-                  <circle cx="38" cy="38" r="30" fill="none" stroke="#F3F4F6" stroke-width="6"/>
-                  <circle cx="38" cy="38" r="30" fill="none" stroke="#3B82F6" stroke-width="6"
-                    stroke-dasharray="188.5" stroke-dashoffset="47.1"
-                    stroke-linecap="round" transform="rotate(-90 38 38)"/>
-                  <text x="38" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#111827" font-family="Sora,sans-serif">3/4</text>
-                  <text x="38" y="48" text-anchor="middle" font-size="8.5" fill="#9CA3AF" font-family="DM Sans,sans-serif">tomados</text>
-                </svg>
-                <span class="ring-sub">Progresso de hoje</span>
-              </div>
-
-              <p class="period-label">Manhã</p>
-
-              <div class="med-item">
-                <div class="med-dot" style="background:#DBEAFE;">☀️</div>
-                <div class="med-info">
-                  <div class="med-name">Vitamina D</div>
-                  <div class="med-dose">2000 UI · 08:00</div>
-                </div>
-                <div class="med-check done">
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-
-              <div class="med-item">
-                <div class="med-dot" style="background:#D1FAE5;">🐟</div>
-                <div class="med-info">
-                  <div class="med-name">Ômega 3</div>
-                  <div class="med-dose">1 g · 08:00</div>
-                </div>
-                <div class="med-check done">
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-
-              <p class="period-label" style="margin-top:10px;">Noite</p>
-
-              <div class="med-item">
-                <div class="med-dot" style="background:#EDE9FE;">💪</div>
-                <div class="med-info">
-                  <div class="med-name">Creatina</div>
-                  <div class="med-dose">5 g · 22:00</div>
-                </div>
-                <div class="med-check done">
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                    <path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-
-              <div class="med-item">
-                <div class="med-dot" style="background:#FEF3C7;">🌙</div>
-                <div class="med-info">
-                  <div class="med-name">Magnésio</div>
-                  <div class="med-dose">400 mg · 22:00</div>
-                </div>
-                <div class="med-check"></div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="streak-badge" aria-hidden="true">
-          <span class="streak-badge-emoji">🔥</span>
-          <div>
-            <div class="streak-num">18</div>
-            <div class="streak-lbl">dias seguidos</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
     <section class="how-section">
@@ -850,7 +776,7 @@
     <section class="features-section">
       <div class="section-inner">
         <p class="section-tag">Funcionalidades</p>
-        <h2 class="section-title">Tudo que você precisa para não falhar</h2>
+        <h2 class="section-title">Mais organização para sua rotina</h2>
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">🔔</div>
@@ -859,7 +785,7 @@
           </div>
           <div class="feature-card">
             <div class="feature-icon" aria-hidden="true">📊</div>
-            <h3>Veja onde você acertou e falhou</h3>
+            <h3>Acompanhe sua rotina ao longo do tempo</h3>
             <p>Calendário visual e gráfico de 14 dias mostram exatamente sua consistência — sem esconder a realidade.</p>
           </div>
           <div class="feature-card">
@@ -880,7 +806,7 @@
     <section class="pricing-section">
       <div class="section-inner">
         <p class="section-tag">Planos</p>
-        <h2 class="section-title">Gratuito para começar.<br>Pro para quem leva a sério.</h2>
+        <h2 class="section-title">Gratuito para começar.<br>Mais espaço com o Pro.</h2>
         <div class="pricing-grid">
 
           <div class="pricing-card">
@@ -896,7 +822,7 @@
           </div>
 
           <div class="pricing-card featured">
-            <span class="badge">Mais popular</span>
+            <span class="badge">Dozr Pro</span>
             <p class="plan-name">Pro</p>
             <p class="plan-price">R$9,90</p>
             <p class="plan-period">por mês · ou R$79,90/ano — economize ~33%</p>
@@ -980,6 +906,7 @@
       </div>
     </section>
 
+<nav class="guide-links" aria-label="Guias"><a href="/pt/lembrete-de-suplementos/">Organizar suplementos</a><a href="/pt/lembrete-de-remedios/">Lembretes de medicamentos</a></nav>
   </main>
 
   <!-- ── FOOTER ──────────────────────────────────────────────────── -->
@@ -991,6 +918,7 @@
     <p class="footer-copy">&copy; 2026 Dozr. Todos os direitos reservados.</p>
   </footer>
 
+  <div class="mobile-download"><a href="https://apps.apple.com/app/id6771156963" data-track="appstore_mobile_pt">Baixar grátis na App Store</a></div>
   <script>
     function trackEvent(name) {
       window.dataLayer = window.dataLayer || [];

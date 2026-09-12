@@ -1,8 +1,7 @@
-# Dozr — Netlify Redirects
-# GeoIP redirect: Brazilian visitors land on the PT-BR page
-
-/pt/    /pt/index.html    200
-/pt     /pt/index.html    200
-/_forms /index.html       200
-/       /pt/index.html    302    Country=BR
-/*      /index.html       200
+# Explicit language URLs keep manual language switching predictable.
+/pt /pt/ 301
+/privacy-policy /privacy-policy.html 200
+/terms-of-use /terms-of-use.html 200
+# Existing files and directory index pages are served normally.
+# Missing URLs must return a real 404, not the homepage.
+/* /404.html 404
